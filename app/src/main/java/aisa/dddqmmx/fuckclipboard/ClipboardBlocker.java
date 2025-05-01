@@ -13,18 +13,16 @@ public class ClipboardBlocker implements IXposedHookLoadPackage {
     @Override
     public void handleLoadPackage(final XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if (!"android".equals(lpparam.packageName)) {
-            return; // Only hook in system server
+            return;
         }
-
         try {
             Class<?> clipboardService = XposedHelpers.findClass("com.android.server.clipboard.ClipboardService", lpparam.classLoader);
-
             try {
                 XposedHelpers.findAndHookMethod(
                         clipboardService,
                         "getClipboardLocked",
-                        int.class, // userId
-                        int.class, // deviceId
+                        int.class,
+                        int.class,
                         new XC_MethodHook() {
                             @Override
                             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
