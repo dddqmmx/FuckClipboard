@@ -27,25 +27,8 @@ jobs:
     - name: Build Release APK
       run: ./gradlew assembleRelease
 
-    - name: Create GitHub Release
-      id: create_release
-      if: success()
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Upload APK as Artifact
+      uses: actions/upload-artifact@v4
       with:
-        tag_name: v1.0.${{ github.run_number }}
-        release_name: Release v1.0.${{ github.run_number }}
-        draft: false
-        prerelease: false
-
-    - name: Upload APK to GitHub Release
-      if: success()
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: app/release/app-release.apk
-        asset_name: app-release-${{ github.run_number }}.apk
-        asset_content_type: application/vnd.android.package-archive
+        name: app-release-apk
+        path: app/release/app-release.apk
