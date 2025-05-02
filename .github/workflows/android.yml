@@ -27,12 +27,6 @@ jobs:
     - name: Build Release APK
       run: ./gradlew assembleRelease
 
-    - name: Archive APK for Release
-      if: success()
-      run: |
-        mkdir -p release
-        cp app/build/outputs/apk/release/app-release.apk release/
-
     - name: Create GitHub Release
       id: create_release
       if: success()
