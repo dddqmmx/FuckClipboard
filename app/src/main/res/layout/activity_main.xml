@@ -10,7 +10,7 @@
         android:id="@+id/clipboardContent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="测试版中测试版,甚至输入法都不能读取剪切板"
+        android:text="测试版,只有gboard输入法可以读取剪切板"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
